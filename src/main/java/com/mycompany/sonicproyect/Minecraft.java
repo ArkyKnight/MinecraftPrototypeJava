@@ -27,18 +27,21 @@ public class Minecraft extends JPanel implements MouseListener, MouseMotionListe
     private int mouseY = 400;
 
     
-     private void playMusicBackground(String filePath) {
-        try {
-            File audioFile = new File(filePath);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-            audioClip = AudioSystem.getClip();
-            audioClip.open(audioStream);
-            audioClip.start();
-            audioClip.loop(60);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
-        }
+    private void playMusicBackground(String resourcePath) {
+    try {
+        AudioInputStream audioStream =
+                AudioSystem.getAudioInputStream(
+                        Minecraft.class.getResource(resourcePath)
+                );
+
+        audioClip = AudioSystem.getClip();
+        audioClip.open(audioStream);
+        audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
     
     
     public Minecraft() {
@@ -50,20 +53,24 @@ public class Minecraft extends JPanel implements MouseListener, MouseMotionListe
         initializeBackground();
         generateTrees(60);
         startLeafColorAnimation(); 
-        playMusicBackground("/home/arky/NetBeansProjects/SonicProject/src/main/java/com/mycompany/sonicproyect/aria.wav");
+        playMusicBackground("/com/mycompany/sonicproyect/aria.wav");
     }
 
-    private void playMusic(String filePath) {
-        try {
-            File audioFile = new File(filePath);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-            audioClip = AudioSystem.getClip();
-            audioClip.open(audioStream);
-            audioClip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
-        }
+    private void playMusic(String resourcePath) {
+    try {
+        AudioInputStream audioStream =
+                AudioSystem.getAudioInputStream(
+                        Minecraft.class.getResource(resourcePath)
+                );
+
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioStream);
+        clip.start();
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
     
    
 
@@ -185,12 +192,12 @@ public class Minecraft extends JPanel implements MouseListener, MouseMotionListe
             for (Block b : blocks) {
                 if (b.getX0() == blockX && b.getY0() == blockY && b.getVisible()) {
                     if (b.getColor() == 0x491300) {
-                        playMusic("/home/arky/NetBeansProjects/SonicProject/src/main/java/com/mycompany/sonicproyect/wood.wav");
+                        playMusic("/com/mycompany/sonicproyect/wood.wav");
                         woodCount++;
                         selectedBlockType = "madera";
                         System.out.println("Wood broken. You now have " + woodCount);
                     } else if ("hoja".equals(b.getType())) {
-                        playMusic("/home/arky/NetBeansProjects/SonicProject/src/main/java/com/mycompany/sonicproyect/grass.wav");
+                        playMusic("/com/mycompany/sonicproyect/grass.wav");
                         leafCount++;
                         leafColors.add(b.getColor());
                         selectedBlockType = "hoja";
@@ -206,7 +213,7 @@ public class Minecraft extends JPanel implements MouseListener, MouseMotionListe
                 newBlock.setType("madera");
                 newBlock.drawSprite(blockX, blockY, 0x491300, "madera");
                 blocks.add(newBlock);
-                playMusic("/home/arky/NetBeansProjects/SonicProject/src/main/java/com/mycompany/sonicproyect/place.wav");
+                playMusic("/com/mycompany/sonicproyect/place.wav");
                 woodCount--;
                 System.out.println("Wood block placed. Remaining wood: " + woodCount);
             } else if ("hoja".equals(selectedBlockType) && leafCount > 0 && !leafColors.isEmpty()) {
@@ -216,7 +223,7 @@ public class Minecraft extends JPanel implements MouseListener, MouseMotionListe
                 int leafColor = leafColors.remove(leafColors.size() - 1);
                 newBlock.drawSprite(blockX, blockY, leafColor, "hojas");
                 blocks.add(newBlock);
-                playMusic("/home/arky/NetBeansProjects/SonicProject/src/main/java/com/mycompany/sonicproyect/grassplace.wav");
+                playMusic("/com/mycompany/sonicproyect/grassplace.wav");
                 leafCount--;
                 System.out.println("Leaf block placed. Remaining leaves: " + leafCount);
             } else {
