@@ -11,7 +11,7 @@ Basic prototype of the classic version of Minecraft:
 
 ##  General operation:
 
-This prototype is a basic version of Minecraft in 2D aerial view. When the user opens the program, a random world is generated, featuring different colored trees in different positions, making the prototype more replayable. The leaves change every 5 seconds. If the user takes the color that appeared there, that same color is saved in their inventory along with the other colors. The wood and leaves are stored in different slots. If the user presses the number 1, they will select leaves, and if they select 2, they will select wood.
+This prototype is a basic version of Minecraft in 2D aerial view. When the user opens the program, a random world is generated, featuring different colored trees in different positions, making the prototype more replayable. The leaves change every 5 seconds. If the user takes the color that appeared there, that same color is saved in their inventory along with the other colors. The wood and leaves are stored in different slots. If the user presses the key number 1, he will select leaves, and if he presses the key number 2, they he will select wood.
 <br>
 <br>
 
